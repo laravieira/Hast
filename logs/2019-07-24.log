@@ -1,0 +1,99 @@
+[12:50:38][INFO] Starting the server... 
+[12:50:39][WARNING] EULA file has been created on this server directory, please accept it. 
+[12:50:39][WARNING] Stopping the server. 
+[12:51:24][INFO] Starting the server... 
+[12:51:24][WARNING] Config file has been created on this server directory. 
+[12:51:24][WARNING] Setup config file and restart this server to apply new configs. 
+[12:51:24][WARNING] Stopping the server. 
+[12:51:24][WARNING] HTTPS services and connections closeds. 
+[12:51:24][WARNING] Database connection closed. 
+[12:51:24][WARNING] Server stoped. 
+[12:51:58][INFO] Starting the server... 
+[12:51:58][SEVERE] Can't read the config file. Please check it or delete it. 
+[12:51:58][WARNING] Stopping the server. 
+[12:51:59][WARNING] HTTPS services and connections closeds. 
+[12:51:59][WARNING] Database connection closed. 
+[12:51:59][WARNING] Server stoped. 
+[12:53:45][INFO] Starting the server... 
+[12:53:45][INFO] All settings has been loaded. 
+[12:53:45][INFO] Database type is Memory. 
+[12:53:48][INFO] Checking main database structure. 
+[12:53:48][INFO] Main Database structure is ok. 
+[12:53:48][INFO] Checking history database structure. 
+[12:53:48][INFO] History database structure is ok. 
+[12:53:48][INFO] root folder for web files created. 
+[12:53:48][INFO] All directories for web files created. 
+[12:53:48][INFO] Build web completed. 
+[12:53:48][INFO] Loading HTTP for HTTPS redirect. 
+[12:53:48][INFO] Loading HTTPS Server 
+[12:53:49][SEVERE] C:\OnlineProjects\Dropbox\EclipseJava\HAST\certs\HAST.crt (The system cannot find the path specified) 
+[12:53:49][SEVERE] HTTPS Server can't be started. 
+[12:53:49][WARNING] Stopping the server. 
+[12:53:49][WARNING] HTTP services and connections closeds. 
+[12:53:49][WARNING] HTTPS services and connections closeds. 
+[12:53:49][WARNING] Database connection closed. 
+[12:53:49][WARNING] Server stoped. 
+[12:54:23][INFO] Starting the server... 
+[12:54:23][INFO] All settings has been loaded. 
+[12:54:23][INFO] Database type is Memory. 
+[12:54:23][INFO] Checking main database structure. 
+[12:54:23][INFO] Main Database structure is ok. 
+[12:54:23][INFO] Checking history database structure. 
+[12:54:23][INFO] History database structure is ok. 
+[12:54:23][INFO] Web files already placed. To replace them delete/rename the folder "web" on server folder. 
+[12:54:23][INFO] Loading HTTP for HTTPS redirect. 
+[12:54:24][INFO] Loading HTTPS Server 
+[12:54:24][INFO] The server is all loaded! 
+[12:54:33][WARNING] Stopping the server. 
+[12:54:33][WARNING] HTTP services and connections closeds. 
+[12:54:33][WARNING] HTTPS services and connections closeds. 
+[12:54:33][WARNING] Database connection closed. 
+[12:54:33][WARNING] Server stoped. 
+[13:04:15][INFO] Starting the server... 
+[13:04:42][INFO] Starting the server... 
+[13:04:46][INFO] All settings has been loaded. 
+[13:04:46][INFO] The server is all loaded! 
+[13:09:50][INFO] Starting the server... 
+[13:09:54][INFO] All settings has been loaded. 
+[13:09:54][INFO] The server is all loaded! 
+[13:10:38][INFO] Starting the server... 
+[13:10:42][INFO] All settings has been loaded. 
+[13:10:42][INFO] The server is all loaded! 
+[13:11:57][INFO] Starting the server... 
+[13:12:00][INFO] All settings has been loaded. 
+[13:12:00][INFO] The server is all loaded! 
+[13:36:36][INFO] Starting the server... 
+[13:36:39][INFO] Spring started. 
+[13:36:40][INFO] All settings has been loaded. 
+[13:36:40][INFO] The server is all loaded! 
+[19:42:52][INFO] Starting the server... 
+[19:42:56][INFO] Spring started. 
+[19:42:56][INFO] All settings has been loaded. 
+[19:42:56][INFO] The server is all loaded! 
+[19:47:29][INFO] Starting the server... 
+[19:47:32][INFO] Spring started. 
+[19:47:32][INFO] All settings has been loaded. 
+[19:47:32][INFO] The server is all loaded! 
+[19:48:42][INFO] Starting the server... 
+[19:48:46][INFO] Spring started. 
+[19:48:46][INFO] All settings has been loaded. 
+[19:48:46][INFO] The server is all loaded! 
+[19:51:44][INFO] Starting the server... 
+[19:51:45][INFO] Spring is starting. 
+[19:51:48][INFO] Spring started. 
+[19:51:48][INFO] All settings has been loaded. 
+[19:51:48][INFO] The server is all loaded! 
+[20:08:25][INFO] Starting the server... 
+[20:08:25][INFO] Spring is starting. 
+[20:08:28][INFO] Spring started. 
+[20:08:28][INFO] All settings has been loaded. 
+[20:08:28][INFO] The server is all loaded! 
+[20:09:08][INFO] Starting the server... 
+[20:09:09][INFO] Spring is starting. 
+[20:09:12][INFO] Spring started. 
+[20:10:21][INFO] Starting the server... 
+[20:10:22][INFO] Spring is starting. 
+[20:10:25][INFO] Spring started. 
+[20:14:59][INFO] Starting the server... 
+[20:15:00][INFO] Spring is starting. 
+[20:15:03][INFO] Spring started. 

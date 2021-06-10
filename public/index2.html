@@ -1,0 +1,644 @@
+<?PHP
+
+// Get links
+$index = yaml_parse_file($_SERVER["DOCUMENT_ROOT"]."/core/config.yml");
+if(!$index) {
+  http_response_code(500);
+  return false;
+}
+
+// Pre-sets
+date_default_timezone_set($index["system_timezone"]);
+include $_SERVER["DOCUMENT_ROOT"]."/".$index["core_language"];
+if(!loadLanguage($_SERVER["DOCUMENT_ROOT"]."/", $index["system_language"])) {
+  http_response_code(500);
+  return false;
+}
+
+// Login Verify
+if(session_status() != PHP_SESSION_ACTIVE) {
+	session_start();
+}if(!isset($_SESSION["email"]) || empty($_SESSION["email"])) {
+	session_destroy();
+	header("Location: ".$index["system_url"].$index["loc_page_login"]);
+	return true;
+}
+try {
+	// Conecta no bando de dados
+	$Connect = new PDO("mysql:host=".$index["database_general_host"].";dbname=".$index["database_general_name"], $index["database_general_user"], $index["database_general_pass"]);
+	$Connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+?><!DOCTYPE html>
+<html lang="<?PHP echo $index["system_language"]; ?>">
+  <head>
+	
+	<!-- Set basic configs -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- Set FavIcon File and Title -->
+	<link rel="icon" href="<?PHP echo $index["system_url"].$index["loc_favicon"]; ?>" type="image/ico" />
+    <title><?PHP echo $index["system_name"]; ?></title>
+
+	<!-- Basic CSS Files -->
+    <link rel="stylesheet" href="<?PHP echo $index["system_url"].$index["file_bootstrap_CSS"];       ?>"><!-- Bootstrap          -->
+    <link rel="stylesheet" href="<?PHP echo $index["system_url"].$index["file_fonts"];               ?>"><!-- Font Awesome       -->
+    <link rel="stylesheet" href="<?PHP echo $index["system_url"].$index["file_nProgress_CSS"];       ?>"><!-- NProgress          -->
+    <link rel="stylesheet" href="<?PHP echo $index["system_url"].$index["file_progress_bar_CSS"];    ?>"><!-- Progress Bar       -->
+    <link rel="stylesheet" href="<?PHP echo $index["system_url"].$index["file_daterangepicker_CSS"]; ?>"><!-- DaterangePicker    -->
+    <link rel="stylesheet" href="<?PHP echo $index["system_url"].$index["file_dataTables_BS"];       ?>"><!-- Data Table         -->
+    <link rel="stylesheet" href="<?PHP echo $index["system_url"].$index["file_switchery_CSS"];       ?>"><!-- Switchery          -->
+    <link rel="stylesheet" href="<?PHP echo $index["system_url"].$index["file_basic_CSS"];           ?>"><!-- Custom Theme Style -->
+    <style>
+      body {background: url(<?PHP echo $index["system_url"].$index["background_image"]; ?>) fixed no-repeat;}
+      .nav_menu {background: rgba(237, 237, 237, <?PHP echo 1.00-$index["menu_top_opacity"]; ?>);}
+      .left_col.scroll-view {background: rgba(42, 63, 84, <?PHP echo 1.00-$index["menu_left_opacity"]; ?>);}
+      .right_col {background: rgba(237, 237, 237, <?PHP echo 1.00-$index["body_opacity"]; ?>);}
+    </style>
+    <script> // language pack for JS functions
+    </script>
+	  
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+		  
+		<!-- sidebar -->
+        <div class="col-md-3 left_col menu_fixed">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="<?PHP echo $index["system_url"].$index["loc_page_dashboard"]; ?>" class="site_title"><img class="fa fa-paw" src="<?PHP echo $index["system_url"].$index["loc_icon"]; ?>"> <span><?PHP echo $index["system_name"]; ?></span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <ul class="nav side-menu">
+                  <li><a href="<?PHP echo $index["system_url"].$index["loc_page_dashboard"]; ?>"><i class="fa fa-home"></i><?PHP echoLang("nav_dashboard"); ?></a></li>
+<?PHP
+					// Exibe o menu de gerenciamento de acordo com a hierarquia
+					$db = $Connect->query("SELECT * FROM ".$index["database_table_users"]." WHERE email='".$_SESSION["email"]."'")->fetch();
+					if($db["level"] == 0) {
+						echo '<li><a href="'.$index["system_url"].$index["loc_page_sections"].'"><i class="fa fa-cubes"></i>'.lang("nav_manager_sections").'</a></li>';
+						echo '<li><a href="'.$index["system_url"].$index["loc_page_sensors"].'"><i class="fa  fa-bug"></i>'.lang("nav_manager_sensors").'</a></li>';
+						echo '<li><a href="'.$index["system_url"].$index["loc_page_actuators"].'"><i class="fa fa-toggle-off"></i>'.lang("nav_manager_actuators").'</a></li>';
+						echo '<li><a href="'.$index["system_url"].$index["loc_page_automation"].'"><i class="fa fa-cogs"></i>'.lang("nav_manager_automations").'</a></li>';
+						echo '<li><a href="'.$index["system_url"].$index["loc_page_graphics"].'"><i class="fa fa-area-chart"></i>'.lang("nav_manager_graphics").'</a></li>';
+						echo '</ul></div>';
+					}else if($db["level"] == 1) {
+						echo '<li><a href="'.$index["system_url"].$index["loc_page_sections"].'"><i class="fa fa-cubes"></i>'.lang("nav_manager_sections").'</a></li>';
+						echo '<li><a href="'.$index["system_url"].$index["loc_page_automation"].'"><i class="fa fa-cogs"></i>'.lang("nav_manager_automations").'</a></li>';
+						echo '<li><a href="'.$index["system_url"].$index["loc_page_graphics"].'"><i class="fa fa-area-chart"></i>'.lang("nav_manager_graphics").'</a></li>';
+						echo '</ul></div>';
+					}
+	
+				?></div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="<?PHP echoLang("nav_settings"); ?>" href="<?PHP echo $index["system_url"].$index["loc_page_settings"];  ?>">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="<?PHP echoLang("nav_fullscreen"); ?>">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="<?PHP echoLang("nav_help"); ?>" href="<?PHP echo $index["system_url"].$index["loc_page_help"];    ?>">
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="<?PHP echoLang("nav_logout"); ?>" href="<?PHP echo $index["system_url"].$index["loc_page_logout"];  ?>">
+                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+		<!-- /sidebar -->
+		
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?PHP
+					  // Busca pelo usuário
+					  $db = $Connect->query("SELECT * FROM ".$index["database_table_users"]." WHERE email='".$_SESSION["email"]."'")->fetch();
+					  if(empty($db["image_profile"])) {
+					  	echo '<i class="fa fa-user" style="margin: 0px 10px 0px 0px">&nbsp;&nbsp;&nbsp;'.$db["name"].'</i>';
+            }else {
+					  	echo '<img src="'.$index["system_url"].$index["loc_profiles_icons"].$db["image_profile"].'.png" alt="">'.$db["name"]."&nbsp;&nbsp;";
+            }
+                    ?><span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="<?PHP echo $index["system_url"].$index["loc_page_profile"];  ?>"><?PHP echoLang("nav_profile"); ?></a></li>
+                    <li><a href="<?PHP echo $index["system_url"].$index["loc_page_settings"]; ?>"><?PHP echoLang("nav_settings"); ?></a></li>
+                    <li><a href="<?PHP echo $index["system_url"].$index["loc_page_help"];     ?>"><?PHP echoLang("nav_help"); ?></a></li>
+                    <li><a href="<?PHP echo $index["system_url"].$index["loc_page_logout"];   ?>"><i class="fa fa-sign-out pull-right"></i><?PHP echoLang("nav_logout"); ?></a></li>
+                  </ul>
+                </li>
+
+                <li role="presentation" class="dropdown">
+                  <a class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-newspaper-o"></i>
+                    <!--<span class="badge bg-green">6</span>-->
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <div class="text-center">
+						  <h4><?PHP echoLang("nav_notifications_clear"); ?></h4>
+                        <a>
+                          <strong><?PHP echoLang("nav_notifications_see_all"); ?></strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+          <!-- Tile Row -->
+          <div class="row tile_count">
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
+              <div class="count">2500</div>
+              <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-clock-o"></i> Average Time</span>
+              <div class="count">123.50</div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Total Males</span>
+              <div class="count green">2,500</div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Total Females</span>
+              <div class="count">4,567</div>
+              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Total Collections</span>
+              <div class="count">2,315</div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
+              <div class="count">7,325</div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+            </div>
+          </div>
+
+          <div class="row">
+            
+            <!-- Graph Panel -->
+            <div class="clearfix"></div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="dashboard_graph x_panel">
+                <div class="row x_title">
+                  <div class="col-md-6">
+                    <h3>Energy Spend <small>data from energy sensors</small></h3>
+                  </div>
+                  <div class="col-md-5">
+                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                      <span></span> <b class="caret"></b>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a title="<?PHP echoLang("panel_button_help"); ?>" class="link" target="_blank" href="<?PHP echo $index["system_url"].$index["loc_page_help"].""; ?>"><i class="fa fa-question"></i></a></li>
+                      <li><a title="<?PHP echoLang("panel_button_dropdown"); ?>" class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                      <li><a title="<?PHP echoLang("panel_button_close"); ?>" class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 x_content">
+                  <div id="chart_plot_01" class="demo-placeholder"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dynamic Table -->
+            <div class="clearfix"></div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="row x_title">
+                  <div class="col-md-11">
+                    <h2>Sensors list</h2>
+                  </div>
+                  <div class="col-md-1">
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a title="<?PHP echoLang("panel_button_help"); ?>" class="link" target="_blank" href="<?PHP echo $index["system_url"].$index["loc_page_help"].""; ?>"><i class="fa fa-question"></i></a></li>
+                      <li><a title="<?PHP echoLang("panel_button_dropdown"); ?>" class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                      <li><a title="<?PHP echoLang("panel_button_close"); ?>" class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 x_content">
+                  <table id="datatable" class="table table-hover table-striped">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Key</th>
+                        <th>Type</th>
+                        <th>Unity</th>
+                        <th>Options</th>
+                      </tr>
+                    </thead>
+
+
+                    <tbody>
+                      <tr>
+                        <td class="table_align">
+                          <p class="alignleft">45378625</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy ID"><i class="fa  fa-tag"></i></button>
+                        </td>
+                        <td>Water Sensor</td>
+                        <td class="table_align">
+                          <p class="alignleft">mnCKm9dIFI32qGRp51zacHqZ0t1eLQcTj</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy Key"><i class="fa  fa-key"></i></button>
+                        </td>
+                        <td>int</td>
+                        <td>L</td>
+                        <td>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Sensor"><i class="fa fa-cogs"></i></button>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Sensor"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table_align">
+                          <p class="alignleft">58967521</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy ID"><i class="fa  fa-tag"></i></button>
+                        </td>
+                        <td>Temperature Sensor</td>
+                        <td class="table_align">
+                          <p class="alignleft">b9QVMMftwUCUrx60ZDADiaTXan6u5L1v</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy Key"><i class="fa  fa-key"></i></button>
+                        </td>
+                        <td>float</td>
+                        <td>C</td>
+                        <td>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Sensor"><i class="fa fa-cogs"></i></button>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Sensor"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table_align">
+                          <p class="alignleft">85479682</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy ID"><i class="fa  fa-tag"></i></button>
+                        </td>
+                        <td>Compess Sensor</td>
+                        <td class="table_align">
+                          <p class="alignleft">LjEHaUGwQeFBbEzwy9PGig0VuqJRP7dR</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy Key"><i class="fa  fa-key"></i></button>
+                        </td>
+                        <td>float</td>
+                        <td>Dreg.</td>
+                        <td>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Sensor"><i class="fa fa-cogs"></i></button>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Sensor"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table_align">
+                          <p class="alignleft">65784392</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy ID"><i class="fa  fa-tag"></i></button>
+                        </td>
+                        <td>Dirty Sensor</td>
+                        <td class="table_align">
+                          <p class="alignleft">k2xnC2L4iiMqwHhfRidUdUSE9jE5Rj6K</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy Key"><i class="fa  fa-key"></i></button>
+                        </td>
+                        <td>float</td>
+                        <td>%</td>
+                        <td>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Sensor"><i class="fa fa-cogs"></i></button>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Sensor"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table_align">
+                          <p class="alignleft">45876219</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy ID"><i class="fa  fa-tag"></i></button>
+                        </td>
+                        <td>PH Sensor</td>
+                        <td class="table_align">
+                          <p class="alignleft">9lQlM7eh8sBMM3XpliaJwPXAB7STY1Z0</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy Key"><i class="fa  fa-key"></i></button>
+                        </td>
+                        <td>float</td>
+                        <td>ppm</td>
+                        <td>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Sensor"><i class="fa fa-cogs"></i></button>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Sensor"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table_align">
+                          <p class="alignleft">15986247</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy ID"><i class="fa  fa-tag"></i></button>
+                        </td>
+                        <td>Light Sensor</td>
+                        <td class="table_align">
+                          <p class="alignleft">xpbDU7Nh5wHFBMWasI3to4Lk76TvgXwv</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy Key"><i class="fa  fa-key"></i></button>
+                        </td>
+                        <td>float</td>
+                        <td></td>
+                        <td>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Sensor"><i class="fa fa-cogs"></i></button>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Sensor"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table_align">
+                          <p class="alignleft">35846259</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy ID"><i class="fa  fa-tag"></i></button>
+                        </td>
+                        <td>Weight Sensor</td>
+                        <td class="table_align">
+                          <p class="alignleft">IsCDezeLQgophJlpiSivKla2gfPwoopd</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy Key"><i class="fa  fa-key"></i></button>
+                        </td>
+                        <td>float</td>
+                        <td>kg</td>
+                        <td>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Sensor"><i class="fa fa-cogs"></i></button>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Sensor"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table_align">
+                          <p class="alignleft">35874685</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy ID"><i class="fa  fa-tag"></i></button>
+                        </td>
+                        <td>Window Sensor</td>
+                        <td class="table_align">
+                          <p class="alignleft">L0cp1FcqvqH3pXnJeWHeRpl0ecFnQUYw</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy Key"><i class="fa  fa-key"></i></button>
+                        </td>
+                        <td>boolean</td>
+                        <td></td>
+                        <td>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Sensor"><i class="fa fa-cogs"></i></button>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Sensor"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table_align">
+                          <p class="alignleft">35892548</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy ID"><i class="fa  fa-tag"></i></button>
+                        </td>
+                        <td>Room Light Sensor</td>
+                        <td class="table_align">
+                          <p class="alignleft">gURiIIj58M7gwIxBRIGdDHaZRSWAbylc</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy Key"><i class="fa  fa-key"></i></button>
+                        </td>
+                        <td>float</td>
+                        <td></td>
+                        <td>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Sensor"><i class="fa fa-cogs"></i></button>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Sensor"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table_align">
+                          <p class="alignleft">38569751</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy ID"><i class="fa  fa-tag"></i></button>
+                        </td>
+                        <td>Door Sensor</td>
+                        <td class="table_align">
+                          <p class="alignleft">NzVcVbppBqx5d1Q644DqkF8xQQhVxBic</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy Key"><i class="fa  fa-key"></i></button>
+                        </td>
+                        <td>boolean</td>
+                        <td></td>
+                        <td>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Sensor"><i class="fa fa-cogs"></i></button>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Sensor"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table_align">
+                          <p class="alignleft">98765248</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy ID"><i class="fa  fa-tag"></i></button>
+                        </td>
+                        <td>Food Sensor</td>
+                        <td class="table_align">
+                          <p class="alignleft">pBPmxMzUV7Dx9DG6aIout4D3oJLWZcnW</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy Key"><i class="fa  fa-key"></i></button>
+                        </td>
+                        <td>boolean</td>
+                        <td></td>
+                        <td>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Sensor"><i class="fa fa-cogs"></i></button>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Sensor"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table_align">
+                          <p class="alignleft">58632957</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy ID"><i class="fa  fa-tag"></i></button>
+                        </td>
+                        <td>Chips Sensor</td>
+                        <td class="table_align">
+                          <p class="alignleft">3JS8HCoIRSU4cp3NtzffyM1MiTYktcKp</p>
+                          <button class="btn btn-link alignleft" data-toggle="tooltip" data-placement="top" title="Copy Key"><i class="fa  fa-key"></i></button>
+                        </td>
+                        <td>boolean</td>
+                        <td></td>
+                        <td>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Sensor"><i class="fa fa-cogs"></i></button>
+                          <button class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Sensor"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Inputs -->
+            <div class="clearfix"></div>
+            <div class="col-md-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <div class="col-md-11">
+                    <h2>Input <small>Create a new sensor</small></h2>
+                  </div>
+                  <div class="col-md-1">
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a title="<?PHP echoLang("panel_button_help"); ?>" class="link" target="_blank" href="<?PHP echo $index["system_url"].$index["loc_page_help"].""; ?>"><i class="fa fa-question"></i></a></li>
+                      <li><a title="<?PHP echoLang("panel_button_dropdown"); ?>" class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                      <li><a title="<?PHP echoLang("panel_button_close"); ?>" class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <br />
+                  <form class="form-horizontal form-label-left input_mask">
+
+                    <div class="form-side-left col-md-6 col-ms-6 col-xs-12">
+
+                      <div class="form-group form-toggle-buttons">
+                        <div class="col-md-9 col-sm-9 col-xs-11 col-md-offset-3 col-sm-offset-3 col-xs-offset-1">
+                          <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-default">
+                              <input type="radio" name="options" id="typeB">Boolean
+                            </label>
+                            <label class="btn btn-default">
+                              <input type="radio" name="options" id="typeI">Whole
+                            </label>
+                            <label class="btn btn-default">
+                              <input type="radio" name="options" id="typeF">Float
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Sensor Name" required="required">
+                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <input type="text" class="form-control has-feedback-left" placeholder="°C, mmg/c³, ppm..." required="required">
+                          <span class="fa fa-italic form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <input type="text" class="form-control has-feedback-left" placeholder="Decimal " required="required">
+                          <span class="fa fa-italic form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-side-right col-md-6 col-ms-6 col-xs-12">
+
+                      <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <div class="">
+                            <label>
+                              <input type="checkbox" class="js-switch" /> Collection of data per request.
+                            </label>
+                          </div>
+                          <div class="">
+                            <label>
+                              <input type="checkbox" group="date-time" class="js-switch" /> Date-time on each data.
+                            </label>
+                          </div>
+                          <div class="">
+                            <label>
+                              <input type="checkbox" group="date-time" class="js-switch" /> Date-time on request and time on each data.
+                            </label>
+                          </div>
+                          <div class="">
+                            <label>
+                              <input type="checkbox" group="date-time" class="js-switch" /> Request and data without Date-time.
+                            </label>
+                          </div>
+                          <div class="">
+                            <label>
+                              <input type="checkbox" group="date-time" class="js-switch" /> Do log. (This will spend more proccessor and disk resources).
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-12 col-ms-12 col-xs-12">
+                      <div class="ln_solid"></div>
+                      <div class="alignright">
+                        <button type="submit" class="btn btn-success right">Submit</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            <?PHP echo "&copy; ".date("Y")." | <a href='".$index["system_url"]."' title='".$index["system_name"]."'>".$index["system_name"]." ".lang("fotter_msg_one")."</a>, ".lang("fotter_msg_two").' <a href="https://jwdouglas.net" title="'.lang("fotter_title_jwdouglas").'" target="_blank">JWDouglas Vieira</a>. '.lang("fotter_msg_thee").' <a href="https://github.com/ColorlibHQ/gentelella" title="'.lang("fotter_title_github").'" target="_blank">Gentelella Theme</a> '.lang("fotter_msg_two").' <a href="https://colorlib.com" title="'.lang("fotter_title_colorlib").'" target="_blank">Colorlib</a>.'; ?>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+		  
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="the-modal" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="x_panel">
+          <div class="row x_title">
+            <h2>Title</h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a title="<?PHP echoLang("panel_button_help"); ?>" class="link" target="_blank" href="<?PHP echo $index["system_url"].$index["loc_page_help"].""; ?>"><i class="fa fa-question"></i></a></li>
+              <li><a title="<?PHP echoLang("panel_button_dropdown"); ?>" class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+              <li><a title="<?PHP echoLang("panel_button_close"); ?>" data-dismiss="modal"><i class="fa fa-close"></i></a></li>
+            </ul>
+          </div>
+          <div class="col-md-12 col-sm-12 col-xs-12 x_content">
+            <p>Content</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+	  <!-- Basic Scripts Files -->
+    <script src="<?PHP echo $index["system_url"].$index["file_jQuery"];             ?>"></script><!-- jQuery               -->
+    <script src="<?PHP echo $index["system_url"].$index["file_bootstrap_JS"];       ?>"></script><!-- Bootstrap            -->
+    <script src="<?PHP echo $index["system_url"].$index["file_nProgress_JS"];       ?>"></script><!-- NProgress            -->
+    <script src="<?PHP echo $index["system_url"].$index["file_progress_bar_JS"];    ?>"></script><!-- Progress Bar         -->
+    <script src="<?PHP echo $index["system_url"].$index["file_moment"];             ?>"></script><!-- Moment               -->
+    <script src="<?PHP echo $index["system_url"].$index["file_daterangepicker_JS"]; ?>"></script><!-- DateRangePicker      -->
+    <script src="<?PHP echo $index["system_url"].$index["file_date_JS"];            ?>"></script><!-- Date                 -->
+    <script src="<?PHP echo $index["system_url"].$index["file_flot"];               ?>"></script><!-- Flot                 -->
+    <script src="<?PHP echo $index["system_url"].$index["file_flot_pie"];           ?>"></script><!-- Flot Pie             -->
+    <script src="<?PHP echo $index["system_url"].$index["file_flot_time"];          ?>"></script><!-- Flot Time            -->
+    <script src="<?PHP echo $index["system_url"].$index["file_flot_stack"];         ?>"></script><!-- Flot Stack           -->
+    <script src="<?PHP echo $index["system_url"].$index["file_flot_resize"];        ?>"></script><!-- Flot Resize          -->
+    <script src="<?PHP echo $index["system_url"].$index["file_flot_order_bars"];    ?>"></script><!-- Flot Order Bars      -->
+    <script src="<?PHP echo $index["system_url"].$index["file_flot_spline"];        ?>"></script><!-- Flot Spline          -->
+    <script src="<?PHP echo $index["system_url"].$index["file_dataTables_JS"];      ?>"></script><!-- Data Table           -->
+    <script src="<?PHP echo $index["system_url"].$index["file_dataTables_JS_BS"];   ?>"></script><!-- Data Table BS        -->
+    <script src="<?PHP echo $index["system_url"].$index["file_switchery_JS"];       ?>"></script><!-- Switchery            -->
+    <script src="<?PHP echo $index["system_url"].$index["file_basic_JS"];           ?>"></script><!-- Custom Theme Scripts -->
+	
+  </body>
+</html><?PHP 
+}catch(PDOException $Ex) {
+  echo $Ex;
+}
+?>

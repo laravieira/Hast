@@ -1,0 +1,148 @@
+# ---------------------------------------------------------------- #
+# |                    INTELIGENCY HOME SYSTEM                   | #
+# |                         Config File                          | #
+# |                                                              | #
+# |    All editable settings are below up there are write how    | #
+# | use them. If have any error on this file, defaults settings  | #
+# | will be loaded and a notification will appear on dashboard.  | #
+# | To restore all settings, delete this file and a new default  | #
+# | file will be create.                                         | #
+# |                                                              | #
+# | For more information, contact support: contato@jwdouglas.net | #
+# |                                                              | #
+# | Version of this reliase: 1.0                                 | #
+# ---------------------------------------------------------------- #
+
+# The language of all texts, titles, buttons, this file will stay in english.
+# To choose us english language, write "en-us"
+# Para escolher português brasileiro, escreva "pt-br"
+system_language: en-us
+
+# The name of system (This name will appear on titles, headers and footers of pages).
+system_name: Kaza Cultura
+
+# The link to access the dashboard, keep the '/' (bar) character on end link.
+#system_url: http://192.168.1.7/
+system_url: http://kzcult.jwdouglas.net/
+system_update_check: true
+system_update_auto: false
+
+# Set timezone, for timezone list, visit http://php.net/manual/pt_BR/timezones.php
+system_timezone: America/Sao_Paulo
+
+# Set background image and opacity of menus and body
+# to solid keep 0.00, to transpant keep 1.00 (these only affect the background)
+background_image: build/images/background.jpg
+menu_top_opacity: 0.10
+menu_left_opacity: 0.05
+body_opacity: 0.10
+
+# ---------------------------------------------------------------- #
+#           It's not recommend you edit the lines below            #
+#    If you want to procede you need to know what are you doing!   #
+# ---------------------------------------------------------------- #
+
+# Database type, only suported is mysql.
+database_type: mysql
+
+# Database access, host information, database name, database user and your password. In this database are all information about user, system, sensors settings...
+database_general_host: localhost
+#database_general_name: kazacultura_general
+#database_general_user: root
+#database_general_pass: 
+database_general_name: u400396641_kz
+database_general_user: u400396641_kz
+database_general_pass: BA13orEeqE7L
+
+database_table_sections:  sections
+database_table_sensors:   sensors
+database_table_actuators: actuators
+database_table_users:     users
+
+# Database to save all sensors data, settings information will not save here.
+database_data_host: localhost
+#database_data_name: kazacultura_data
+#database_data_user: root
+#database_data_pass: 
+database_data_name: u400396641_kz
+database_data_user: u400396641_kz
+database_data_pass: BA13orEeqE7L
+
+# System Core locations
+core_logger:       core/logger.php
+core_language:     core/language.php
+core_database:     core/database.php
+core_notification: core/notification.php
+
+# System's locations directions
+loc_favicon:         build/images/favicon.ico
+loc_icon:            build/images/icon.png
+loc_profiles_icons:  build/images/profile_icons/
+loc_update_download: 
+
+loc_page_dashboard: 
+loc_page_profile:    user/
+loc_page_settings:   settings/
+loc_page_help:       help/
+loc_page_login:      user/login/
+loc_page_logout:     user/login/?logout
+loc_page_sections:   sections/
+loc_page_section:    section/
+loc_page_sensors:    sensors/
+loc_page_actuators:  actuators/
+loc_page_automation: automation/
+loc_page_graphics:   graphics/
+
+# Adictional files links
+file_fonts:         build/vendors/font-awesome/css/font-awesome.min.css
+file_bootstrap_CSS: build/vendors/bootstrap/dist/css/bootstrap.min.css
+file_nProgress_CSS: build/vendors/nprogress/nprogress.css
+file_basic_CSS:     build/css/custom.css
+file_iCheck_CSS:    build/vendors/iCheck/skins/flat/green.css
+file_extra_CSS:     build/css/extra.css
+
+file_jQuery:        build/vendors/jquery/dist/jquery.min.js
+file_bootstrap_JS:  build/vendors/bootstrap/dist/js/bootstrap.min.js
+file_nProgress_JS:  build/vendors/nprogress/nprogress.js
+file_animate:       build/vendors/animate.css/animate.css
+file_basic_JS:      build/js/custom.js
+file_validator:     build/vendors/validator/validator.js
+file_iCheck:        build/vendors/iCheck/icheck.min.js
+file_jsZip:         build/vendors/jszip/dist/jszip.min.js
+file_makePDF:       build/vendors/pdfmake/build/pdfmake.min.js
+file_makePDF_Fonts: build/vendors/pdfmake/build/vfs_fonts.js
+
+file_dataTables_BS:             build/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css
+file_dataTables_Buttons_BS:     build/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css
+file_dataTables_FixedHeader_BS: build/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css
+file_dataTables_Responsive_BS:  build/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css
+file_dataTables_Scroller_BS:    build/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css
+file_daterangepicker_CSS:       build/vendors/bootstrap-daterangepicker/daterangepicker.css
+file_progress_bar_CSS:          build/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css
+file_switchery_CSS:             build/vendors/switchery/dist/switchery.min.css
+
+file_dataTables_JS:               build/vendors/datatables.net/js/jquery.dataTables.min.js
+file_dataTables_JS_BS:            build/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js
+file_dataTables_Buttons_JS:       build/vendors/datatables.net-buttons/js/dataTables.buttons.min.js
+file_dataTables_Buttons_JS_BS:    build/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js
+file_dataTables_Buttons_JS_Flash: build/vendors/datatables.net-buttons/js/buttons.flash.min.js
+file_dataTables_Buttons_JS_HTML5: build/vendors/datatables.net-buttons/js/buttons.html5.min.js
+file_dataTables_Buttons_JS_Prit:  build/vendors/datatables.net-buttons/js/buttons.print.min.js
+file_dataTables_FixedHeader:      build/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js
+file_dataTables_KeyTable:         build/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js
+file_dataTables_Responsive:       build/vendors/datatables.net-responsive/js/dataTables.responsive.min.js
+file_dataTables_Responsive_BS:    build/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js
+file_dataTables_Scroller:         build/vendors/datatables.net-scroller/js/dataTables.scroller.min.js
+file_flot:                        build/vendors/Flot/jquery.flot.js
+file_flot_pie:                    build/vendors/Flot/jquery.flot.pie.js
+file_flot_time:                   build/vendors/Flot/jquery.flot.time.js
+file_flot_stack:                  build/vendors/Flot/jquery.flot.stack.js
+file_flot_resize:                 build/vendors/Flot/jquery.flot.resize.js
+file_flot_order_bars:             build/vendors/flot.orderbars/js/jquery.flot.orderBars.js
+file_flot_spline:                 build/vendors/flot-spline/js/jquery.flot.spline.min.js
+file_daterangepicker_JS:          build/vendors/bootstrap-daterangepicker/daterangepicker.js
+file_progress_bar_JS:             build/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js
+file_chart_JS:                    build/vendors/Chart.js/dist/Chart.min.js
+file_date_JS:                     build/vendors/DateJS/build/date.js
+file_moment:                      build/vendors/moment/min/moment.min.js
+file_switchery_JS:                build/vendors/switchery/dist/switchery.min.js

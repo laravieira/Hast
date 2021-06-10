@@ -1,0 +1,28 @@
+{
+  "ftps://185.28.21.199:21@u400396641.jwdouglas": {
+    "actuators": {},
+    "automation": {},
+    "build": {},
+    "config": {},
+    "graphics": {},
+    "help": {},
+    "index.php": {
+      "type": "-",
+      "size": 42271,
+      "lmtime": 0,
+      "modified": false
+    },
+    "login": {},
+    "MQTTJavascriptTest.html": {
+      "type": "-",
+      "size": 1994,
+      "lmtime": 0,
+      "modified": false
+    },
+    "profile": {},
+    "section": {},
+    "sections": {},
+    "sensors": {}
+  },
+  "$version": 1
+}

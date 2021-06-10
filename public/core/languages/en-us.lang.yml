@@ -1,0 +1,109 @@
+language: English
+nav_dashboard: Dashboard
+nav_sections: Sections
+nav_no_sections: There are no sections.
+nav_manager: Manager
+nav_manager_sections: Sections
+nav_manager_sensors: Sensors
+nav_manager_actuators: Actuators
+nav_manager_automations: Automations
+nav_manager_graphics: Graphics
+nav_profile: Profile
+nav_settings: Settings
+nav_help: Help
+nav_logout: Go out!
+nav_fullscreen: Fullscreen
+nav_notifications_clear: There are no notifications.
+nav_notifications_see_all: See All.
+fotter_msg_one: Manager
+fotter_msg_two: by
+fotter_msg_thee: Using
+fotter_title_jwdouglas: Visit jwdouglas.net
+fotter_title_github: See Gentelella on GitHub
+fotter_title_colorlib: Visit colorlib.com
+panel_button_help: Help
+panel_button_dropdown: Minimize / Maximize
+panel_button_close: Close Box
+login_title: Login
+login_placeholder_email: Email
+login_placeholder_pass: Password
+login_login_submit: Do Login
+login_keep_logged: Keep logged.
+login_logon_user: User Name
+login_logon_repeat: Your password, again.
+login_logon_submit: Register!
+login_pass_recovery: Forget your Password?
+login_new_msg: New Here?
+login_new_link: Active Account.
+login_already_msg: Already have an account?
+login_already_link: Login with it!
+login_recovery_submit: Send me the Solution!
+login_recovery_msg: Do you know your password?
+login_recovery_link: So, do login!
+sections_title: Sections
+sensor_title: Sensors
+sensor_table_title: All Your Sensors
+sensor_table_header_id: ID
+sensor_table_header_key: Key
+sensor_table_header_name: Name
+sensor_table_header_type: Type
+sensor_table_header_create: Creation Date
+sensor_table_header_unity: Unity
+sensor_table_header_options: Options
+sensor_copy_id: Copy ID
+sensor_copy_key: Copy Key
+sensor_edit: Edit Sensor
+sensor_delete: Delete Sensor
+sensor_type_boolean: Boolean
+sensor_type_whole: Whole
+sensor_type_float: Float
+sensor_create_title: Create a new sensor
+sensor_create_name: Water sensor, Temperature Sensor...
+sensor_create_unity: °C, mg/cm³, ppm...
+sensor_create_decimal: Decimal Places, '3' to 0.000
+sensor_create_option_1: Collection of data per request.
+sensor_create_option_2: Date-time on each data.
+sensor_create_option_3: Date-time on request and timestamp on each data.
+sensor_create_option_4: Request without date and timestamp on each data.
+sensor_create_option_5: Request and data without Date-time and timestamp.
+sensor_create_option_6: Regist on log. (This will spend more proccessor and disk resources, be carefull).
+sensor_create_button: Create it!
+sensor_delete_title: Delete Sensor
+sensor_delete_msg: Do you have sure you want to delete it?
+sensor_delete_button: Yes. Delete it!
+sensor_edit_title: Edit Sensor Details
+sensor_edit_button: Save Settings!
+sensor_edit_loading: Loading congif...
+sensor_edit_load_error: Something went wrong. Please contact suport.
+sensor_edit_id: A new ID will be created.
+sensor_edit_key: A new Key will be created.
+sensor_edit_id_msg: Create a new ID for this sensor.
+sensor_edit_key_msg: Create a new Key for this sensor.
+sensor_edit_history_keep: Keep History
+sensor_edit_history_clear: Clear History
+actuators_title: Actuators
+actuators_type_boolean: Boolean
+actuators_type_whole: Whole
+actuators_type_float: Float
+actuators_table_title: All your actuators
+actuators_table_header_name: Name
+actuators_table_header_id: ID
+actuators_table_header_sensor: Sensor ID
+actuators_table_header_key: Key
+actuators_table_header_type: Type
+actuators_table_header_options: Options
+actuators_table_no_sensor: Without
+actuators_copy_id: Copy ID
+actuators_copy_sensor: Copy Sensor ID
+actuators_copy_key: Copy Key
+actuators_edit: Edit Sensor
+actuators_delete: Delete Sensor
+actuators_create_title: Create a new actuator
+actuators_create_name: Digit a name, like Do Jump, Kkkkk
+actuators_create_unity: What is my unity?
+actuators_create_decimal: How bigger I am? "2" show "0.00" float number.
+actuators_create_choose: Choose a sensor to see real state of this actuator.
+actuators_create_choose_no: There is no sensor to this actuator.
+actuators_create_do_log: Regist on log. (This will spend more proccessor and disk resources, be carefull).
+actuators_create_only_system: Only system (automations) can switch this actuator, disable dashboard switch.
+actuators_create_button: Create it!

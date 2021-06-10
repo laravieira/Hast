@@ -1,0 +1,50 @@
+[2019-03-16 10:18:52][INFO] Starting system...
+[2019-03-16 10:18:52][INFO] Fail try to open config.yml file, loaded with default settings.
+[2019-03-16 10:18:52][INFO] The "English" language is able to be read.
+[2019-03-16 10:18:52][INFO] General database is ok.
+[2019-03-16 10:18:52][ERROR] PDOException: SQLSTATE[HY000] [1049] Unknown database 'kazacultura_sensors' in C:\PlaceProjects\KazaCultura\WebServer\core\database.php:13
+Stack trace:
+#0 C:\PlaceProjects\KazaCultura\WebServer\core\database.php(13): PDO->__construct('mysql:host=loca...', 'root', NULL)
+#1 C:\PlaceProjects\KazaCultura\WebServer\core\database.php(21): openDataDatabase()
+#2 C:\PlaceProjects\KazaCultura\WebServer\core\start.php(98): checkDatabases()
+#3 {main}
+[2019-03-16 10:18:52][INFO] Something is wrong with databases, please check them.
+[2019-03-16 10:26:32][INFO] Starting system...
+[2019-03-16 10:26:32][INFO] Fail try to open config.yml file, loaded with default settings.
+[2019-03-16 10:26:32][INFO] The "English" language is able to be read.
+[2019-03-16 10:26:32][INFO] General database is ok.
+[2019-03-16 10:26:32][ERROR] PDOException: SQLSTATE[HY000] [1049] Unknown database 'kazacultura_sensors' in C:\PlaceProjects\KazaCultura\WebServer\core\database.php:13
+Stack trace:
+#0 C:\PlaceProjects\KazaCultura\WebServer\core\database.php(13): PDO->__construct('mysql:host=loca...', 'root', NULL)
+#1 C:\PlaceProjects\KazaCultura\WebServer\core\database.php(21): openDataDatabase()
+#2 C:\PlaceProjects\KazaCultura\WebServer\core\start.php(98): checkDatabases()
+#3 {main}
+[2019-03-16 10:26:32][INFO] Something is wrong with databases, please check them.
+[2019-03-16 10:27:42][INFO] Starting system...
+[2019-03-16 10:27:42][INFO] Fail try to open config.yml file, loaded with default settings.
+[2019-03-16 10:27:42][INFO] The "English" language is able to be read.
+[2019-03-16 10:27:42][INFO] General database is ok.
+[2019-03-16 10:27:42][ERROR] PDOException: SQLSTATE[HY000] [1049] Unknown database 'kazacultura_sensors' in C:\PlaceProjects\KazaCultura\WebServer\core\database.php:13
+Stack trace:
+#0 C:\PlaceProjects\KazaCultura\WebServer\core\database.php(13): PDO->__construct('mysql:host=loca...', 'root', NULL)
+#1 C:\PlaceProjects\KazaCultura\WebServer\core\database.php(21): openDataDatabase()
+#2 C:\PlaceProjects\KazaCultura\WebServer\core\start.php(98): checkDatabases()
+#3 {main}
+[2019-03-16 10:27:42][INFO] Something is wrong with databases, please check them.
+[2019-03-16 10:28:15][INFO] Starting system...
+[2019-03-16 10:28:15][INFO] Fail try to open config.yml file, loaded with default settings.
+[2019-03-16 10:28:15][INFO] The "English" language is able to be read.
+[2019-03-16 10:28:15][INFO] General database is ok.
+[2019-03-16 10:28:15][ERROR] PDOException: SQLSTATE[HY000] [1049] Unknown database 'kazacultura_sensors' in C:\PlaceProjects\KazaCultura\WebServer\core\database.php:13
+Stack trace:
+#0 C:\PlaceProjects\KazaCultura\WebServer\core\database.php(13): PDO->__construct('mysql:host=loca...', 'root', NULL)
+#1 C:\PlaceProjects\KazaCultura\WebServer\core\database.php(21): openDataDatabase()
+#2 C:\PlaceProjects\KazaCultura\WebServer\core\start.php(98): checkDatabases()
+#3 {main}
+[2019-03-16 10:28:15][INFO] Something is wrong with databases, please check them.
+[2019-03-16 10:29:44][INFO] Starting system...
+[2019-03-16 10:29:44][INFO] Settings from config.yml has been loaded.
+[2019-03-16 10:29:44][INFO] The "English" language is able to be read.
+[2019-03-16 10:29:44][INFO] General database is ok.
+[2019-03-16 10:29:44][INFO] Data database is ok.
+[2019-03-16 10:29:44][INFO] Databases are ok.

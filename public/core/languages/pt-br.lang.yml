@@ -1,0 +1,109 @@
+language: Português
+nav_dashboard: Painel de Controle
+nav_sections: Seções
+nav_no_sections: Não há seções.
+nav_manager: Gerenciador
+nav_manager_sections: Seções
+nav_manager_sensors: Sensores
+nav_manager_actuators: Atuadores
+nav_manager_automations: Automações
+nav_manager_graphics: Gráficos
+nav_profile: Perfil
+nav_settings: Configurações
+nav_help: Ajuda
+nav_logout: Sair!
+nav_fullscreen: Tela Cheia
+nav_notifications_clear: Não há notificações.
+nav_notifications_see_all: Ver todas.
+fotter_msg_one: 
+fotter_msg_two: por
+fotter_msg_thee: Usando
+fotter_title_jwdouglas: Visite jwdouglas.net
+fotter_title_github: Veja Gentelella no GitHub
+fotter_title_colorlib: Visite colorlib.com
+panel_button_help: Ajuda
+panel_button_dropdown: Minimizar / Maximizar
+panel_button_close: Fechar
+login_title: Login
+login_placeholder_email: E-mail
+login_placeholder_pass: Senha
+login_login_submit: Entar
+login_keep_logged: Manter logado.
+login_logon_user: Nome de usuário
+login_logon_repeat: Sua senha, de novo
+login_logon_submit: Registrar!
+login_pass_recovery: Esqueceu sua senha?
+login_new_msg: Novo aqui?
+login_new_link: Ativar conta.
+login_already_msg: Já tem uma conta?
+login_already_link: Entre com ela!
+login_recovery_submit: Envie-me a solução!
+login_recovery_msg: Você sabe a sua senha?
+login_recovery_link: Então entre com ela!
+sections_title: Seções
+sensor_title: Sensores
+sensor_table_title: Todos os seus sensores
+sensor_table_header_id: ID
+sensor_table_header_key: Chave
+sensor_table_header_name: Nome
+sensor_table_header_type: Tipo
+sensor_table_header_create: Data de criação
+sensor_table_header_unity: Unidade
+sensor_table_header_options: Opções
+sensor_copy_id: Copiar ID
+sensor_copy_key: Copiar Chave
+sensor_edit: Editar Sensor
+sensor_delete: Apagar Sensor
+sensor_type_boolean: Digital
+sensor_type_whole: Inteiro
+sensor_type_float: Flutuante
+sensor_create_title: Criar um novo sensor
+sensor_create_name: Sensor de água, sensor de temperatura...
+sensor_create_unity: °C, mg/cm³, ppm...
+sensor_create_decimal: Casas decimais, '3' para ter 0.000
+sensor_create_option_1: Coleção de dados por requisição.
+sensor_create_option_2: Data e hora em cada dado.
+sensor_create_option_3: Data e hora na requisição, timestamp em cada dado.
+sensor_create_option_4: Requisição sem data e hora, timestamp em cada dado.
+sensor_create_option_5: Requisição e dados sem data, hora e timestamp.
+sensor_create_option_6: Log de registro. (Aumenta o uso de processamento e uso de disco, tenha cuidado).
+sensor_create_button: Criar!
+sensor_delete_title: Deletar Sensor
+sensor_delete_msg: Você tem certeza que quer apagar o sensor?
+sensor_delete_button: Sim, Apague!
+sensor_edit_title: Mude detalhes do sensor
+sensor_edit_button: Salvar modificações!
+sensor_edit_loading: Carregando detalhes...
+sensor_edit_load_error: Alguma coisa deu errado, avise o suporte.
+sensor_edit_id: Um novo ID será criado.
+sensor_edit_key: Uma nova chave será criada.
+sensor_edit_id_msg: Criar um novo ID para este sensor.
+sensor_edit_key_msg: Criar uma nova chave para este sensor.
+sensor_edit_history_keep: Manter Histórico
+sensor_edit_history_clear: Apagar Histórico
+actuators_title: Atuadores
+actuators_type_boolean: Digital
+actuators_type_whole: Inteiro
+actuators_type_float: Flutuante
+actuators_table_title: Todos os seus sensores
+actuators_table_header_name: Nome
+actuators_table_header_id: ID
+actuators_table_header_sensor: ID do Sensor
+actuators_table_header_key: Chave
+actuators_table_header_type: Tipo
+actuators_table_header_options: Opções
+actuators_table_no_sensor: Sem sensor
+actuators_copy_id: Copiar ID
+actuators_copy_sensor: Copiar ID do Sensor
+actuators_copy_key: Copiar Chave
+actuators_edit: Editar Atuador
+actuators_delete: Apagar Atuador
+actuators_create_title: Crear um novo Atuador
+actuators_create_name: Digite um nome, como Pular, Kkkkk
+actuators_create_unity: Qual é a minha unidade?
+actuators_create_decimal: Qual o meu tamanho? "2" será "0.00" de casas decimais.
+actuators_create_choose: Escolha um sensor para mostrar o stado atual do atuador.
+actuators_create_choose_no: Não selecionar um sensor para este atuador.
+actuators_create_do_log: Log de registro. (Aumenta o uso de processamento e uso de disco, tenha cuidado).
+actuators_create_only_system: Somente o systema (atomações) podem mudar o estado deste atuador, não permite mudar o estado do atuador no paineol de controle.
+actuators_create_button: Criar!

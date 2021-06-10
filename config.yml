@@ -1,0 +1,32 @@
+# ---------------------------------------------------------- #
+#                                                            #
+#                  HAST Server Config File                   #
+#                                                            #
+#                                                            #
+#       For help check http://hast.jwdouglas.net/Doc/        #
+#                                                            #
+# ---------------------------------------------------------- #
+
+
+server.name: HAST Server
+server.password: hastpassword
+server.log: normal # [debug, normal]
+server.check.update: true
+database.mode: memory # [file, memory, mysql]
+database.host: localhost
+database.port: 3306
+database.name: hastserver
+database.user: root
+database.pass: 
+
+http.use: true
+http.port: 8080
+https.port: 8443
+
+mqtt.host: localhost
+mqtt.port: 1883
+mqtt.user: hastserver
+mqtt.pass: 
+
+mdns.use: true
+mdns.nick: hastserver

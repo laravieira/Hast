@@ -1,0 +1,16 @@
+{
+    "host": "185.28.21.199",
+    "username": "u400396641.jwdouglas",
+    "password": "Spot|fyets2gab",
+    "remotePath": "",
+    "protocol": "ftps",
+    "port": 21,
+    "fileNameEncoding": "utf8",
+    "autoUpload": true,
+    "autoDelete": true,
+    "autoDownload": true,
+    "ignore": [
+        ".git",
+        "/.vscode"
+    ]
+}

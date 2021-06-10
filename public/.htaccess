@@ -1,0 +1,5 @@
+Options -Indexes
+RedirectMatch 403 ^/core/.*$
+ErrorDocument 403 /fails/403.php/
+ErrorDocument 404 /fails/404.php/
+ErrorDocument 500 /fails/500.php/
